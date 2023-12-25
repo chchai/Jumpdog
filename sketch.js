@@ -7,6 +7,7 @@ var gameChar_y;
 var floorPos_y;
 var scrollPos;
 var gameChar_world_x;
+var touchPos;
 //game character condition
 var isLeft;
 var isRight;
@@ -138,6 +139,28 @@ function draw()
     textSize(20);
     fill(210, 105, 30);
     text('Score: ' + game_score, 30, 45);
+
+    //Draw touch bar
+    //Left
+    fill(200, 200, 30);
+    rect(50, 700, 50, 50);
+    textSize(20);
+    fill(100, 100, 130);
+    text('L', 70, 730);
+    //Right
+    fill(200, 200, 30);
+    rect(330, 700, 50, 50);
+    textSize(20);
+    fill(100, 100, 130);
+    text('R', 350, 730);
+    //Space
+    fill(200, 200, 30);
+    rect(170, 700, 90, 50);
+    textSize(20);
+    fill(100, 100, 130);
+    touchPos = touches.x_pos;
+    text(touchPos, 190, 730);
+
     
     //check if the player is dead
     checkPlayerDie();
@@ -249,7 +272,7 @@ function draw()
 function keyPressed()
 {
     //left arrow - go left and play walk sound
-    if(keyCode == 37 && (flagpole.isReached == false && lives > 0))
+    if((keyCode == 37) && (flagpole.isReached == false && lives > 0))
     {
         isLeft = true;
         walkSound.play();
