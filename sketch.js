@@ -36,15 +36,15 @@ function preload()
 {
     //preload game sounds
     soundFormats('wav');
-    jumpSound = loadSound('soundtrack/jump.wav');
+    jumpSound = loadSound('jump.wav');
     jumpSound.setVolume(0.1);
-    walkSound = loadSound('soundtrack/walk.wav');
+    walkSound = loadSound('walk.wav');
     walkSound.setVolume(1.2);
-    collectSound = loadSound('soundtrack/collect.wav');
+    collectSound = loadSound('collect.wav');
     collectSound.setVolume(0.1);
-    failSound = loadSound('soundtrack/fail.wav');
+    failSound = loadSound('fail.wav');
     failSound.setVolume(1);
-    successSound = loadSound('soundtrack/success.wav');
+    successSound = loadSound('success.wav');
     successSound.setVolume(0.1);
     dogImg = loadImage("Face front.png");
     dogjumpImg = loadImage("Jump front.png");
