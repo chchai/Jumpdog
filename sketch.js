@@ -115,10 +115,15 @@ function draw()
         var isContact = enemies[i].checkContact(gameChar_world_x, gameChar_y)
         if(isContact)
         {
-            if(lives > 0)
+            if(lives > 1)
             {
                 lives -= 1;
                 startGame();
+                break;
+            }
+            else
+            {
+                lives -= 1;
                 break;
             }
         }
@@ -152,18 +157,18 @@ function draw()
     //"Game over. Press space to continue." when `lives` is less than 1.
     if(lives < 1)
     {
-        textSize(50);
+        textSize(20);
         fill(220, 20 ,60);
-        text('Game over. Press space to continue.', 100, height/2);
+        text('Game over. Press space to continue.', 50, height/2);
         return;
     }
     
     //"Level complete. Press space to continue." when `flagpole.isReached` is true
     if(flagpole.isReached == true)
     {
-        textSize(50);
+        textSize(20);
         fill(220, 20 ,60);
-        text('Level complete. Press space to continue.', 70, height/2);
+        text('Level complete. Press space to continue.', 50, height/2);
         return;
     }
     
@@ -178,7 +183,7 @@ function draw()
 	if(isLeft)
 	{
 		
-        if(gameChar_x > width * 0.2)
+        if(gameChar_x > width * 0.4)
 		{
 			gameChar_x -= 5;
 		}
@@ -190,7 +195,7 @@ function draw()
 
 	if(isRight)
 	{
-        if(gameChar_x < width * 0.8)
+        if(gameChar_x < width * 0.6)
 		{
 			gameChar_x  += 5;
 		}
@@ -229,7 +234,7 @@ function draw()
     
     if(isPlummeting == true)
     {
-        gameChar_y += 3;
+        gameChar_y += 5;
     }
     
 	// Update real position of gameChar for collision detection.
@@ -262,7 +267,7 @@ function keyPressed()
         //  && (flagpole.isReached == false && lives > 0)
         )
     {
-        gameChar_y -= 100;
+        gameChar_y -= 150;
         jumpSound.play();
     }
 }
@@ -424,8 +429,8 @@ function drawTrees()
         fill(222, 184, 136);
         rect(trees_x[i], floorPos_y - 100, 20, 100);
         fill(154, 205, 50);
-        triangle(trees_x[i] - 30, 400, trees_x[i] + 50, 400, trees_x[i] + 10, 340);
-        triangle(trees_x[i] - 30, 370, trees_x[i] + 50, 370, trees_x[i] + 10, 300);
+        triangle(trees_x[i] - 30, 530, trees_x[i] + 50, 530, trees_x[i] + 10, 480);
+        triangle(trees_x[i] - 30, 570, trees_x[i] + 50, 570, trees_x[i] + 10, 510);
     }
 }
 
@@ -629,7 +634,7 @@ function checkPlayerDie()
 //start game settings and Restart the game if player still has lives
 function startGame()
 {
-	createCanvas(1024, 576);
+	createCanvas(450, 800);
 	floorPos_y = height * 3/4;
 	gameChar_x = width* 2/5;
 	gameChar_y = floorPos_y;
@@ -651,14 +656,14 @@ function startGame()
 	// Initialise arrays of scenery objects.
     trees_x = [100, 300, 700, 1100, 1600, 1800, 2500];
     clouds = [
-        {x_pos: 100, y_pos: 100, width: 50}, 
+        {x_pos: 100, y_pos: 200, width: 50}, 
         {x_pos: 400, y_pos: 135, width: 40},
-        {x_pos: 600, y_pos: 80, width: 80},
+        {x_pos: 600, y_pos: 180, width: 80},
         {x_pos: 1000, y_pos: 150, width: 50},
-        {x_pos: 1300, y_pos: 70, width: 80},
+        {x_pos: 1300, y_pos: 170, width: 80},
         {x_pos: 1700, y_pos: 140, width: 40},
-        {x_pos: 1900, y_pos: 130, width: 70},
-        {x_pos: 2400, y_pos: 80, width: 50}
+        {x_pos: 1900, y_pos: 230, width: 70},
+        {x_pos: 2400, y_pos: 100, width: 50}
     ];
     mountains = [
         {x_pos: 50, width: 250},
@@ -673,21 +678,21 @@ function startGame()
         {x_pos: 2200, size: 130}
     ];
     collectables = [
-        {x_pos: 200, y_pos: 400, size: 50, isFound: false},
-        {x_pos: 480, y_pos: 320, size: 50, isFound: false},
-        {x_pos: 650, y_pos: 270, size: 50, isFound: false},
-        {x_pos: 1000, y_pos: 400, size: 50, isFound: false},
-        {x_pos: 1450, y_pos: 350, size: 50, isFound: false},
-        {x_pos: 1850, y_pos: 210, size: 50, isFound: false},
-        {x_pos: 2000, y_pos: 320, size: 50, isFound: false},
-        {x_pos: 2350, y_pos: 350, size: 50, isFound: false}
+        {x_pos: 200, y_pos: 500, size: 50, isFound: false},
+        {x_pos: 480, y_pos: 420, size: 50, isFound: false},
+        {x_pos: 650, y_pos: 370, size: 50, isFound: false},
+        {x_pos: 1000, y_pos: 500, size: 50, isFound: false},
+        {x_pos: 1450, y_pos: 450, size: 50, isFound: false},
+        {x_pos: 1850, y_pos: 310, size: 50, isFound: false},
+        {x_pos: 2000, y_pos: 420, size: 50, isFound: false},
+        {x_pos: 2350, y_pos: 450, size: 50, isFound: false}
     ];
     
     // initialize platform
     platforms = [];
-    platforms.push(createPlatforms(500, 360, 100));
-    platforms.push(createPlatforms(1650, 360, 80));
-    platforms.push(createPlatforms(1750, 280, 50));
+    platforms.push(createPlatforms(500, 500, 100));
+    platforms.push(createPlatforms(1650, 480, 80));
+    platforms.push(createPlatforms(1750, 450, 50));
 
     // initialize enemies
     enemies = [];
